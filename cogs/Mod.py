@@ -141,23 +141,7 @@ class Mod(commands.Cog):
     if channel != ctx.channel:
       await channel.send(embed = embed)
 
-  @commands.command()
-  @commands.has_permissions(kick_members = True)
-  async def warn(self, ctx, member: discord.Member = None, *, reason = None):
-    if member == None:
-      await ctx.send("Mention someone to warn!")
-    else:
-      embed = discord.Embed(title = f"Warned {member}", description = f"{member.mention} was warned. \n Reason: {reason}", colour = discord.Colour.blue())
-      embed.set_footer(text = f"Action taken by moderator {ctx.author.name}")
-      await ctx.send(embed = embed)
-      warn_channel = discord.utils.get(ctx.guild.channels,name =  "warnings")
-      if warn_channel == None:
-        warn_channel = await ctx.guild.create_text_channel("warnings")
-        await warn_channel.set_permissions(ctx.guild.default_role, send_messages = False)
-      await warn_channel.send(embed = embed)
   
-
-
-
+  
 def setup(client):
   client.add_cog(Mod(client))
